@@ -2,7 +2,7 @@
 Boilerplate based on [Create React App](https://github.com/facebook/create-react-app). with 
 - [ ] ENV config (production, staging, dev)
 - [ ] i18n
-    - [] Localization manager integration
+    - [ ] Localization manager integration
 - [ ] Auth0 authentification
     - [ ] JWT token management
 - [ ] Sentry Error Tracking

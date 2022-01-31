@@ -65,7 +65,8 @@
           "caseInsensitive": true
         }
       }
-    ]
+    ],
+    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }]
   },
   "settings": {
     "import/resolver": {
