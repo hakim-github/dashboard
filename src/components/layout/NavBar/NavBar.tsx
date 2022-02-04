@@ -14,7 +14,7 @@ function Users() {
   return <h2>Users</h2>;
 }
 function NotFound404() {
-  return <h2>404 Not found</h2>;
+  return <h2>404 Not found Go back</h2>;
 }
 
 export default function NavBar() {
