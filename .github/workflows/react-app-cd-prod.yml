@@ -1,41 +1,43 @@
 name: CI/CD Production
-
-on:
+'on':
   push:
     branches:
       - master
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
-        
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
           name: Hakim-Github/dashboard/dashboard-prod-image
           registry: docker.pkg.github.com
-          username: ${{ secrets.GIT_USERNAME }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: '${{ secrets.GIT_USERNAME }}'
+          password: '${{ secrets.GITHUB_TOKEN }}'
           dockerfile: Dockerfile.prod
           tags: latest
-
-    - name: Deploy package to digitalocean
-      uses: appleboy/ssh-action@master
-      env:
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:          
+      - name: Deploy package to digitalocean
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_USERNAME: '${{ secrets.GITHUB_USERNAME }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          envs: GITHUB_USERNAME, GITHUB_TOKEN
-          script: |
-            docker stop $(docker ps -a -q)
-            docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-            docker pull docker.pkg.github.com/Hakim-Github/dashboard/dashboard-prod-image:latest
-            docker run -dit -p 80:80 docker.pkg.github.com/Hakim-Github/dashboard/dashboard-prod-image:latest
+          with:
+            host: '${{ secrets.HOST }}'
+            username: '${{ secrets.USERNAME }}'
+            password: '${{ secrets.PASSWORD }}'
+            port: '${{ secrets.PORT }}'
+            envs: 'GITHUB_USERNAME, GITHUB_TOKEN'
+            script: >
+              docker stop $(docker ps -a -q)
+
+              docker login docker.pkg.github.com -u $GITHUB_USERNAME -p
+              $GITHUB_TOKEN
+
+              docker pull
+              docker.pkg.github.com/Hakim-Github/dashboard/dashboard-prod-image:latest
+
+              docker run -dit -p 80:80
+              docker.pkg.github.com/Hakim-Github/dashboard/dashboard-prod-image:latest
