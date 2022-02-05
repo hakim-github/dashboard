@@ -14,7 +14,7 @@ jobs:
         with:
           name: Hakim-Github/dashboard/dashboard-prod-image
           registry: docker.pkg.github.com
-          username: ${{ secrets.GIT_USERNAME }}
+          username: ${{ secrets.GITHUB_USERNAME }}
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
