@@ -18,8 +18,6 @@ jobs:
           password: '${{ secrets.GITHUB_TOKEN }}'
           dockerfile: Dockerfile.prod
           tags: latest
-
-        run: echo "$GITHUB_CONTEXT"
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
