@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "husky install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -52,10 +51,9 @@
     "husky": "7.0.4",
     "prettier": "2.5.1"
   },
-  "resolutions": 
-  {
+  "resolutions": {
     "postcss": "^8.2.13 ",
-    "nth-check":"^2.0.1"
+    "nth-check": "^2.0.1"
   },
   "browserslist": {
     "production": [
