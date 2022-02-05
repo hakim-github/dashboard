@@ -1,4 +1,4 @@
-name: ci
+name: REACT APP CI
 
 on:
   push:
@@ -49,3 +49,6 @@ jobs:
 
       - name: Run tests
         run: yarn test
+
+      - name: Build
+        run: npm run build
