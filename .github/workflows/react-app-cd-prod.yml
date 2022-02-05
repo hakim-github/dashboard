@@ -18,6 +18,11 @@ jobs:
           password: '${{ secrets.GITHUB_TOKEN }}'
           dockerfile: Dockerfile.prod
           tags: latest
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
+        run: echo "$GITHUB_CONTEXT"
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
@@ -25,7 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
+          username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN
