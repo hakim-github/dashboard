@@ -19,7 +19,7 @@ jobs:
         with:
           name: $GITHUB_ACTOR/dashboard/dashboard_prod_image
           registry: docker.pkg.github.com
-          username: ${{ secrets.GITHUB_USERNAME }}
+          username: $GITHUB_ACTOR
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
@@ -31,7 +31,7 @@ jobs:
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
-          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_USERNAME: $GITHUB_ACTOR
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           host: ${{ secrets.SSH_HOST }}
