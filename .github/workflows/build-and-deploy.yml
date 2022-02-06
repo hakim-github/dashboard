@@ -22,6 +22,7 @@ jobs:
           dockerfile: Dockerfile.prod
           tags: latest
   deploy-on-remote-server:
+    needs: build-and-publish-docker-image
     runs-on: ubuntu-latest
     steps:
       - name: Deploy package to digitalocean
