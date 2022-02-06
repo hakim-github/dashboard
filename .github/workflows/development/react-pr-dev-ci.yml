@@ -8,7 +8,7 @@ on:
       - development
 
 jobs:
-  ci:
+  react-ci-dev:
     runs-on: ${{ matrix.os }}
 
     strategy:
