@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
-          build-args: REACT_APP_ENV=$REACT_APP_ENV
+          buildargs: REACT_APP_ENV
   deploy-on-remote-server:
     needs: build-and-publish-docker-image
     runs-on: ubuntu-latest
