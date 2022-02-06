@@ -18,7 +18,7 @@ jobs:
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: $GIT_USERNAME_LOWERCASE/dashboard/dashboard_prod_image
+          name: hakim-github/dashboard/dashboard_prod_image
           registry: docker.pkg.github.com
           username: $GIT_USERNAME_LOWERCASE
           password: ${{ secrets.GITHUB_TOKEN }}
