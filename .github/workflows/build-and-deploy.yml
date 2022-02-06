@@ -1,7 +1,7 @@
 name: Build & Deploy
-run: echo ::set-env name=GIT_USERNAME_LOWERCASE::$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')
 env:
   REACT_APP_ENV: production
+  GIT_USERNAME_LOWERCASE: hakim-github
 
 'on':
   workflow_run:
