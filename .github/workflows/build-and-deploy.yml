@@ -1,6 +1,7 @@
 name: Build & Deploy
 env:
   REACT_APP_ENV: production
+run: echo ::set-env name=GIT_USERNAME_LOWERCASE::$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')
 
 'on':
   workflow_run:
@@ -17,9 +18,9 @@ jobs:
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: $GITHUB_ACTOR/dashboard/dashboard_prod_image
+          name: $GIT_USERNAME_LOWERCASE/dashboard/dashboard_prod_image
           registry: docker.pkg.github.com
-          username: $GITHUB_ACTOR
+          username: $GIT_USERNAME_LOWERCASE
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
@@ -31,7 +32,7 @@ jobs:
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
-          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_USERNAME: $GIT_USERNAME_LOWERCASE
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           host: ${{ secrets.SSH_HOST }}
