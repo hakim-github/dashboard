@@ -1,4 +1,6 @@
-name: React app CI
+name: React CI
+env:
+  REACT_APP_ENV: production
 
 on:
   push:

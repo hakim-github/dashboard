@@ -1,10 +1,13 @@
-name: CI/CD Production
+name: Build & Deploy
+env:
+  REACT_APP_ENV: production
+
 'on':
   push:
     branches:
       - master
 jobs:
-  build:
+  build-and-publish-docker-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +21,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
-
+  deploy-on-remote-server:
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
