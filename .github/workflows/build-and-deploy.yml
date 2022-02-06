@@ -1,7 +1,6 @@
 name: Build & Deploy
 env:
   REACT_APP_ENV: production
-  GIT_USERNAME_LOWERCASE: hakim-github
 
 'on':
   workflow_run:
@@ -18,9 +17,9 @@ jobs:
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: hakim-github/dashboard/dashboard_prod_image
+          name: '${{ github.actor }}/dashboard/dashboard_prod_image'
           registry: docker.pkg.github.com
-          username: $GIT_USERNAME_LOWERCASE
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
@@ -32,7 +31,7 @@ jobs:
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
-          GITHUB_USERNAME: $GIT_USERNAME_LOWERCASE
+          GITHUB_USERNAME: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           host: ${{ secrets.SSH_HOST }}
