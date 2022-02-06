@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@master
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
+        args: ${{ REACT_APP_ENV }}
         with:
           name: Hakim-Github/dashboard/dashboard_prod_image
           registry: docker.pkg.github.com

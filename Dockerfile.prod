@@ -1,7 +1,7 @@
 FROM node:16-alpine3.14 AS builder
 WORKDIR /app
 # ENV
-ENV REACT_APP_ENV
+ARG REACT_APP_ENV
 # END OF ENV
 
 COPY package.json ./
