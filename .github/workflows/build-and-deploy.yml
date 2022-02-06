@@ -4,7 +4,7 @@ env:
 
 'on':
   workflow_run:
-    workflows: ['React CI']
+    workflows: ['React CI Merge']
     types:
       - completed
 
@@ -17,9 +17,9 @@ jobs:
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: $GITHUB_USERNAME/dashboard/dashboard_prod_image
+          name: ${{ secrets.GITHUB_USERNAME }}/dashboard/dashboard_prod_image
           registry: docker.pkg.github.com
-          username: ${{ secrets.GIT_USERNAME }}
+          username: ${{ secrets.GITHUB_USERNAME }}
           password: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: Dockerfile.prod
           tags: latest
