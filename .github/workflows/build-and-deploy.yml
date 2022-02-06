@@ -17,7 +17,7 @@ jobs:
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: Hakim-Github/dashboard/dashboard_prod_image
+          name: $GITHUB_USERNAME/dashboard/dashboard_prod_image
           registry: docker.pkg.github.com
           username: ${{ secrets.GIT_USERNAME }}
           password: ${{ secrets.GITHUB_TOKEN }}
@@ -31,13 +31,13 @@ jobs:
       - name: Deploy package to digitalocean
         uses: appleboy/ssh-action@master
         env:
-          GITHUB_USERNAME: ${{ secrets.GIT_USERNAME }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
             ids=$(docker ps -a -q)
