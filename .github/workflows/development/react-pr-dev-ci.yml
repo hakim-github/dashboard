@@ -1,14 +1,14 @@
 name: React CI Pull Request
 env:
-  REACT_APP_ENV: production
+  REACT_APP_ENV: development
 
 on:
   pull_request:
     branches:
-      - master
+      - development
 
 jobs:
-  ci:
+  react-ci-dev:
     runs-on: ${{ matrix.os }}
 
     strategy:
